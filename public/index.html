@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <title>html note</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "neco-components/": "../../neco-components/scripts/neco-components/"
+      }
+    }
+  </script>
+  <script type="module" >
+    import "neco-components/header/index.js"
+    import "neco-components/footer/index.js"
+    import "neco-components/ace/index.js"
+    import "neco-components/button/index.js"
+    import "neco-components/file-reader-button/index.js"
+  </script>
+  <style>
+    body{
+      width: 100vw;
+      height: 100vh;
+      font-family:  san-serif;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      display:grid;
+      grid-template-rows: 50px 40px 5px 1fr 30px;
+    }
+    my-header{
+      grid-row: 1/2;
+    }
+    my-nav{
+      grid-row: 2/3;
+    }
+    my-boader{
+      grid-row: 3/4;
+    }
+    neco-ace{
+      grid-row: 4/5;
+    }
+    neco-footer{
+      grid-row: 5/6;
+    }
+  </style>
+</head>
+<body>
+  <my-header>
+    <template shadowrootmode="open">
+      <style>
+        :host{
+          display: grid;
+          grid-template-columns: 230px 1fr;
+        }
+        neco-header{
+          grid-column: 1/2;
+        }
+        my-menu{
+          grid-column: 2/3;
+        }
+      </style>
+      <neco-header data-title='html note' data-color=#3E5358></neco-header>
+      <my-menu>
+        <template shadowrootmode="open">
+          <style>
+            :host{
+              display: grid;
+              grid-template-rows: 5px 1fr 5px;
+              grid-template-columns: repeat(auto-fill, 40px 120px);
+            }
+            neco-file-reader-button, neco-button{
+              --background: white;
+              --color: black;
+              --border: 2px solid #000080;
+              --border-radius: 20px;
+              --color-hover: white;
+              --background-hover: #000080;
+              --border-hover: 2px solid yellow;
+              --transition: 1.2s;
+            }
+            neco-file-reader-button{
+              grid-row: 2/3;
+              grid-column: 2/3;
+            }
+            neco-button.save{
+              grid-row: 2/3;
+              grid-column: 4/5;
+            }
+          </style>
+          <neco-file-reader-button class="read" data-text="read"></neco-file-reader-button>
+          <neco-button class="save" data-text="save"></neco-button>
+        </template>
+      </my-menu>
+    </template>
+  </my-header>
+
+  <my-nav>
+    <template shadowrootmode="open">
+      <style>
+        :host{
+          display: grid;
+          grid-template-columns: 2px 120px 50px 1fr;
+        }
+        neco-button{
+          --font-size: 1.5em;
+
+          --background: white;
+          --color: black;
+          --border: 2px solid #000080;
+          --border-radius: 20px 20px 0 0 ;
+
+          --color-hover: white;
+          --background-hover: #000080;
+          --border-hover: 2px solid yellow;
+          --transition: 1.2s;
+        }
+        neco-button.run{
+          grid-column: 2/3;
+        }
+        my-setting{
+          grid-column: 4/5;
+        }
+      </style>
+      <neco-button class="run" data-text="run"></neco-button>
+      <my-setting>
+        <template shadowrootmode="open">
+          <style>
+            :host{
+              display: flex;
+              align-items: center;
+              gap: 50px;
+            }
+          </style>
+          <div>
+            <label for="key-binding">key binding:</label>
+            <select id="key-binding">
+              <option value="" selected>Ace</option>
+              <option value="vim">Vim</option>
+              <option value="emacs">Emacs</option>
+            </select>   
+          </div>
+          <div>
+            <label for="font-size">font size:</label>
+            <select id="font-size">
+              <option value="10pt">10pt</option>
+              <option value="11pt">11pt</option>
+              <option value="12pt">12pt</option>
+              <option value="13pt" selected>13pt</option>
+              <option value="14pt">14pt</option>
+              <option value="15pt">15pt</option>
+              <option value="16pt">16pt</option>
+            </select>  
+          </div>
+          <div>
+            <label for="theme">theme:</label>
+            <select id="theme">
+              <option value="ambiance"                >ambiance               </option> 
+              <option value="chaos"                   >chaos                  </option>      
+              <option value="chrome"                  >chrome                 </option>          
+              <option value="cloud9_day"              >cloud9_day             </option>    
+              <option value="cloud9_night"            >cloud9_night           </option>    
+              <option value="cloud9_night_low_color"  >cloud9_night_low_color </option>    
+              <option value="cloud_editor"            >cloud_editor           </option>    
+              <option value="cloud_editor_dark"       >cloud_editor_dark      </option>    
+              <option value="clouds"                  >clouds                 </option>    
+              <option value="clouds_midnight"         >clouds_midnight        </option> 
+              <option value="cobalt"                  >cobalt                 </option> 
+              <option value="crimson_editor"          >crimson_editor         </option> 
+              <option value="dawn"                    >dawn                   </option> 
+              <option value="dracula"                 >dracula                </option> 
+              <option value="dreamweaver"             >dreamweaver            </option> 
+              <option value="eclipse"                 >eclipse                </option> 
+              <option value="github"                  >github                 </option> 
+              <option value="github_dark"             >github_dark            </option> 
+              <option value="github_light_default"    >github_light_default   </option> 
+              <option value="gob"                     >gob                    </option> 
+              <option value="gruvbox"                 >gruvbox                </option> 
+              <option value="gruvbox_dark_hard"       >gruvbox_dark_hard      </option> 
+              <option value="gruvbox_light_hard"      >gruvbox_light_hard     </option> 
+              <option value="idle_fingers"            >idle_fingers           </option> 
+              <option value="iplastic"                >iplastic               </option> 
+              <option value="katzenmilch"             >katzenmilch            </option> 
+              <option value="kr_theme"                >kr_theme               </option> 
+              <option value="kuroir"                  >kuroir                 </option> 
+              <option value="merbivore"               >merbivore              </option> 
+              <option value="merbivore_soft"          >merbivore_soft         </option> 
+              <option value="mono_industrial"         >mono_industrial        </option> 
+              <option value="monokai"                 >monokai                </option> 
+              <option value="nord_dark"               >nord_dark              </option> 
+              <option value="one_dark"                >one_dark               </option> 
+              <option value="pastel_on_dark"          >pastel_on_dark         </option> 
+              <option value="solarized_dark"          >solarized_dark         </option> 
+              <option value="solarized_light"         >solarized_light        </option> 
+              <option value="sqlserver"               >sqlserver              </option> 
+              <option value="terminal"                >terminal               </option> 
+              <option value="textmate"                >textmate               </option> 
+              <option value="tomorrow"                >tomorrow               </option> 
+              <option value="tomorrow_night"          >tomorrow_night         </option> 
+              <option value="tomorrow_night_blue"     >tomorrow_night_blue    </option> 
+              <option value="tomorrow_night_bright"   >tomorrow_night_bright  </option> 
+              <option value="tomorrow_night_eighties" >tomorrow_night_eighties</option> 
+              <option value="twilight"                >twilight               </option> 
+              <option value="vibrant_ink"             >vibrant_ink            </option> 
+              <option value="xcode"                   >xcode                  </option> 
+            </select>  
+          </div>
+        </template>
+      </my-setting>
+    </template>
+  </my-nav>
+
+  <my-boader>
+    <template shadowrootmode="open">
+      <style>
+        :host{
+          background: blue;
+        }
+      </style>
+    </template>
+  </my-boader>
+
+  <neco-ace
+    data-is-shadow='false'
+  ></neco-ace>
+
+  <neco-footer
+    data-title='html note'
+    data-version='1.0.0'
+    data-auther='neco-components'
+    data-date-of-issue='2024'
+    data-color='black'
+    data-background='gray'
+  ></neco-footer>
+
+  <script type="module">
+    const PREVIEW_URL  = "./preview.html" 
+    const STORAGE_CODE = "htmlnote_code"
+    const STORAGE_FONT_SIZE = "htmlnote_font_size"
+    const STORAGE_KEY_BINDING = "htmlnote_key_binding"
+    const STORAGE_THEME = "htmlnote_theme"
+
+    const myHeaderElem           = document.querySelector("my-header")
+    const myMenuElem             = myHeaderElem.shadowRoot.querySelector("my-menu")
+    const fileReaderBtnElem      = myMenuElem.shadowRoot.querySelector("neco-file-reader-button")
+    const saveBtnElem            = myMenuElem.shadowRoot.querySelector("neco-button.save")
+    const myNavElem              = document.querySelector("my-nav")
+    const runBtnElem             = myNavElem.shadowRoot.querySelector("neco-button.run")
+    const mySettingElem          = myNavElem.shadowRoot.querySelector("my-setting")
+    const keyBindingElem         = mySettingElem.shadowRoot.querySelector("#key-binding") 
+    const fontSizeElem           = mySettingElem.shadowRoot.querySelector("#font-size") 
+    const themeElem              = mySettingElem.shadowRoot.querySelector("#theme") 
+    const aceElem                = document.querySelector("neco-ace")
+
+
+    let win = null
+
+    const open =  () => {
+     console.log(win)
+     if(!win || win.closed){
+        win = window.open(PREVIEW_URL)  
+      }
+      else{
+        console.log("focus")
+        win.focus()
+      }
+    }
+    const run = () => {
+      const code = aceElem.value
+      localStorage.setItem(STORAGE_CODE, code)
+      if(!win||win.closed){
+        open()
+        setTimeout(()=>win.postMessage(code), 100)
+      }
+      else{
+        win.postMessage(code)
+      }
+    }
+    const saveAs = (text, fileName) => {
+      const blob = new Blob([text], {type: 'text/plain'})
+      const url = window.URL || window.webkitURL
+      const link = url.createObjectURL(blob)
+      const a = document.createElement("a")
+      a.setAttribute("download", fileName)
+      a.setAttribute("href", link)
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+    }
+    const setFontSize = (index) => {
+      fontSizeElem.options[index].selected = true
+      const fontSize = fontSizeElem.options[index].value
+      aceElem.fontSize = fontSize
+    }
+    const setKeyBinding = (index) => {
+      keyBindingElem.options[index].selected = true
+      const keyBinding = keyBindingElem.options[index].value
+      aceElem.keyBinding = keyBinding
+    }
+    const setTheme = (index) => {
+      themeElem.options[index].selected = true
+      const theme = themeElem.options[index].value
+      aceElem.theme = "ace/theme/" + theme
+    }
+
+    const initialize = () => {
+      const code       = localStorage.getItem(STORAGE_CODE)
+      const fontSizeId   = localStorage.getItem(STORAGE_FONT_SIZE)
+      const keyBindingId = localStorage.getItem(STORAGE_KEY_BINDING)
+      const themeId      = localStorage.getItem(STORAGE_THEME)
+
+      if(fontSizeId)   setFontSize(fontSizeId)
+      if(keyBindingId) setKeyBinding(keyBindingId)
+      if(themeId)      setTheme(themeId)
+      
+
+      aceElem.mode  = "ace/mode/html"
+
+      aceElem.value = code
+      runBtnElem.onclick = run
+      aceElem.onrun = run
+
+      fileReaderBtnElem.onread = (files) => {
+        const code = files[0].text
+        aceElem.value = code
+      }
+      saveBtnElem.onclick = () => {
+        const code = aceElem.value
+        saveAs(code,"index.html") 
+      }
+      keyBindingElem.onchange = (e) => {
+        const elem = e.target
+        const index = elem.selectedIndex
+        const value = elem.options[index].value
+        console.log("change editor", value)
+        aceElem.keyBinding = value
+        localStorage.setItem(STORAGE_KEY_BINDING, index)
+      }
+      fontSizeElem.onchange = (e) => {
+        const elem = e.target
+        const index = elem.selectedIndex
+        const value = elem.options[index].value
+        console.log("font size", value)
+        aceElem.fontSize = value
+        localStorage.setItem(STORAGE_FONT_SIZE, index)
+      }
+      themeElem.onchange = (e) => {
+        const elem = e.target
+        const index = elem.selectedIndex
+        const value = elem.options[index].value
+        console.log("theme", value)
+        aceElem.theme = "ace/theme/" + value
+        localStorage.setItem(STORAGE_THEME, index)
+      }
+    }
+
+    initialize()
+
+  </script>
+</body>
+</html>
