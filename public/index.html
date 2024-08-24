@@ -255,12 +255,10 @@
     let win = null
 
     const open =  () => {
-     console.log(win)
      if(!win || win.closed){
         win = window.open(PREVIEW_URL)  
       }
       else{
-        console.log("focus")
         win.focus()
       }
     }
@@ -302,7 +300,8 @@
       aceElem.theme = "ace/theme/" + theme
     }
 
-    const initialize = () => {
+    const initialize = async () => {
+
       const code       = localStorage.getItem(STORAGE_CODE)
       const fontSizeId   = localStorage.getItem(STORAGE_FONT_SIZE)
       const keyBindingId = localStorage.getItem(STORAGE_KEY_BINDING)
@@ -331,7 +330,6 @@
         const elem = e.target
         const index = elem.selectedIndex
         const value = elem.options[index].value
-        console.log("change editor", value)
         aceElem.keyBinding = value
         localStorage.setItem(STORAGE_KEY_BINDING, index)
       }
@@ -339,7 +337,6 @@
         const elem = e.target
         const index = elem.selectedIndex
         const value = elem.options[index].value
-        console.log("font size", value)
         aceElem.fontSize = value
         localStorage.setItem(STORAGE_FONT_SIZE, index)
       }
@@ -347,13 +344,24 @@
         const elem = e.target
         const index = elem.selectedIndex
         const value = elem.options[index].value
-        console.log("theme", value)
         aceElem.theme = "ace/theme/" + value
         localStorage.setItem(STORAGE_THEME, index)
       }
     }
 
-    initialize()
+    const main = async () => {
+      try{
+        const necoengine = await import("/necoengine/scripts/necoengine/index.js")
+        necoengine.login.setLoginButton()
+        necoengine.login.visit()
+        initialize()
+      }
+      catch(e){
+        console.log("necoengine is not alive")
+        initialize()
+      }
+    }
+    main()
 
   </script>
 </body>
