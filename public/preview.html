@@ -1,0 +1,31 @@
+<head>
+  <title>html note preview</title>
+  <style>
+    body{
+      height: 100vh;
+      width : 100vw;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+     }
+    iframe {
+      border: none;
+      height: 100vh;
+      width : 100vw;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const bcCallback = e => {
+      const code = e.data
+      const iframeOld = document.querySelector("iframe")
+      iframeOld?.remove()
+      console.log(code)
+      const iframe = document.createElement("iframe")
+      iframe.srcdoc = code 
+      document.body.appendChild(iframe);
+    }
+    window.onmessage = bcCallback
+  </script>
+</body>
